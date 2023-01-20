@@ -1,0 +1,18 @@
+asgiref==3.6.0
+certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_477u68wvzm/croot/certifi_1671487773341/work/certifi
+cffi==1.15.1
+cryptography==39.0.0
+Django==4.1.5
+django-environ==0.9.0
+djangorestframework==3.14.0
+djangorestframework-jwt==1.11.0
+djangorestframework-simplejwt==5.2.2
+flatbuffers==1.12
+keras==2.9.0
+pycparser==2.21
+PyJWT==1.7.1
+PyMySQL==1.0.2
+pytz==2022.7.1
+sqlparse==0.4.3
+tensorflow==2.9.0
+tensorflow-estimator==2.9.0
