@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone#
-import datetime#
+# import datetime#
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import gettext_lazy as _ #
 
@@ -48,43 +48,53 @@ class User(AbstractBaseUser):
         )
     email = models.EmailField(
         default='', 
-        max_length=100, 
+        max_length=30, 
         null=False, 
         blank=False, 
         unique=True
         )
     name = models.CharField(
         default='', 
-        max_length=100, 
+        max_length=20, 
         null=False, 
         blank=False
         )
     nickname = models.CharField(
         default='', 
-        max_length=100, 
+        max_length=20, 
         null=False, 
         blank=False, 
         unique=True
         )
     sex = models.CharField(
         default='', 
-        max_length=100, 
+        max_length=10, 
         choices=GENDER_CHOICES, 
         null=False, 
-        blank=False,
+        blank=True,
         ) 
-    birth = models.CharField(
-        default='', 
-        max_length=100, 
-        null=False, 
-        blank=False,
-        ) 
+    birth = models.DateField(
+        verbose_name=_('Birth'),
+        null=False
+        )
     contact = models.CharField(
         default='', 
-        max_length=100, 
+        max_length=20, 
         null=False, 
         blank=False,
         ) 
+    is_active = models.BooleanField(
+        verbose_name=_('Is active'),
+        default=True
+        )
+    is_superuser = models.BooleanField(
+        verbose_name=_('Is superuser'),
+        default=False
+        )
+    date_joined = models.DateTimeField(
+        verbose_name=_('Date joined'),
+        default=timezone.now
+        )
     updated_at = models.DateTimeField(auto_now_add=True)
     
     # 헬퍼 클래스 사용
@@ -95,5 +105,5 @@ class User(AbstractBaseUser):
     # 필수로 작성해야하는 field
     REQUIRED_FIELDS = ['email', 'name']
 
-    class Meta:#
+    class Meta:
         db_table = 'user'

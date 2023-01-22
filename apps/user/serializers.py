@@ -2,8 +2,8 @@ from .models import User
 from rest_framework import serializers
 #
 from django.contrib.auth import authenticate
-from rest_framework import  status
-from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework import  status
+# from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from datetime import date
 from apps.user.models import User
@@ -42,6 +42,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         return attrs    
     
     def create(self, validated_data):
+        """ validated_data를 받아 유저를 생성한 후 토큰을 반환합니다. """        
         password = validated_data.get('password')
         # 유저 생성
         user = User.objects.create_user(                

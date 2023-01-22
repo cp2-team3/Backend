@@ -8,8 +8,9 @@ from .serializers import SignUpSerializer, SignInSerializer, UserSerializer
 
 # 회원가입
 class UserSignUpView(generics.CreateAPIView):
+    """ 회원가입 뷰 - 요청을 보낸 사용자를 등록합니다. """
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = SignUpSerializer
 
 #  
 class UserSignInView(generics.GenericAPIView):
