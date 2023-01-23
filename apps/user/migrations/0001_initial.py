@@ -4,7 +4,6 @@ from django.db import migrations, models
 import django.utils.timezone
 
 
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -17,15 +16,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.CharField(max_length=15, primary_key=True, serialize=False, verbose_name='ID')),
                 ('password', models.CharField(max_length=20, verbose_name='password')),
                 ('name', models.CharField(default='', max_length=20)),
-                ('nickname', models.CharField(default='', max_length=20, unique=True)),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('sex', models.CharField(choices=[('Male', '남성'), ('Female', '여성')], max_length=6)),
-                ('birth', models.DateField(verbose_name='birth')),
+                ('nickname', models.CharField(default='', max_length=20)),
+                ('sex', models.CharField(choices=[('Male', '남성'), ('Female', '여성')], max_length=10)),
+                ('birth', models.DateField(verbose_name='Birth')),
                 ('contact', models.CharField(verbose_name='contact',max_length=20)),
                 ('email', models.EmailField(default='', max_length=30, unique=True)),
+                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('is_active', models.BooleanField(default=True, verbose_name='Is active')),
                 ('is_superuser', models.BooleanField(default=False, verbose_name='Is superuser')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date joined')),

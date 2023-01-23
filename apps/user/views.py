@@ -6,13 +6,14 @@ from .serializers import SignUpSerializer, SignInSerializer, UserSerializer
 
 # Create your views here.
 
+
 # 회원가입
 class UserSignUpView(generics.CreateAPIView):
     """ 회원가입 뷰 - 요청을 보낸 사용자를 등록합니다. """
     queryset = User.objects.all()
     serializer_class = SignUpSerializer
 
-#  
+ 
 class UserSignInView(generics.GenericAPIView):
     """ 로그인 뷰 - 요청을 보낸 사용자를 인증합니다. """
     serializer_class = SignInSerializer
@@ -46,6 +47,6 @@ class UserSignInView(generics.GenericAPIView):
 
 class UserWithdrawalView(generics.DestroyAPIView):
     """ 회원탈퇴 뷰 - 요청을 보낸 사용자를 삭제합니다. """
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer

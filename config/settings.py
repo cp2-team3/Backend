@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 import pymysql
+import datetime
 import environ
 
 from pathlib import Path
@@ -25,6 +26,8 @@ environ.Env.read_env(
 )
 
 pymysql.install_as_MySQLdb()
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -52,10 +55,11 @@ INSTALLED_APPS = [
     'apps.user.apps.UsersConfig',
 ]
 
+
 # DJANGO REST FRAMEWORK
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',    
     ],
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.AllowAny",
@@ -74,7 +78,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
+AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
@@ -110,6 +114,16 @@ DATABASES = {
     }
 }
 
+# JWT
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": False,
+    'UPDATE_LAST_LOGIN': True,
+    'TOKEN_USER_CLASS': 'user.User',
+}
+
+REST_USE_JWT = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

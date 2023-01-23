@@ -1,15 +1,13 @@
 from django.db import models
-from django.utils import timezone#
-# import datetime#
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.utils.translation import gettext_lazy as _ #
+from django.utils.translation import gettext_lazy as _ 
 
 # Create your models here.
 
-
 class CustomUserManager(BaseUserManager):
     # 일반 user 생성
-    def create_user(self, id, name, email, password=None): #id, name, email 필수
+    def create_user(self, id, name, email, password=None, **kwargs): #id, name, email 필수
         if not id:
             raise ValueError('must have user id')
         if not name:
@@ -41,9 +39,13 @@ class CustomUserManager(BaseUserManager):
         superuser.save(using=self._db)
         return superuser
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser): #sign-up
     GENDER_CHOICES = (('Male', '남성'), ('Female', '여성'))
-    id = models.AutoField(
+    id = models.CharField(
+        max_length=15,
+        unique=True,
+        null=False,
+        blank=False,
         primary_key=True
         )
     email = models.EmailField(
@@ -64,7 +66,6 @@ class User(AbstractBaseUser):
         max_length=20, 
         null=False, 
         blank=False, 
-        unique=True
         )
     sex = models.CharField(
         default='', 
@@ -75,7 +76,7 @@ class User(AbstractBaseUser):
         ) 
     birth = models.DateField(
         verbose_name=_('Birth'),
-        null=False
+        null=True,
         )
     contact = models.CharField(
         default='', 
