@@ -8,5 +8,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path("sign-up/", UserSignUpView.as_view()),
     path("sign-in/", UserSignInView.as_view()),
-    path("<pk>/withdraw/", UserWithdrawalView.as_view()),
+    path("withdraw/<pk>/", UserWithdrawalView.as_view()),
 ]
