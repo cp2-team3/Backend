@@ -19,12 +19,8 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-<<<<<<< HEAD
-    path('', include('apps.urls')),
-=======
-    
+    path('admin/', admin.site.urls), 
     path('api/', include('apps.urls')),
     path('', RedirectView.as_view(url='/api/', permanent=True)),
->>>>>>> suyeon-ai
+    path('api-auth/', include('rest_framework.urls')), 
 ]

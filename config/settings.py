@@ -53,12 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-<<<<<<< HEAD
     'apps.user.apps.UsersConfig',
-]
-
-=======
-    'apps.user.apps.UserConfig',
     'apps.board.apps.BoardConfig', 
 ]
 
@@ -70,16 +65,11 @@ INSTALLED_APPS = [
 #         'rest_framework.parsers.JSONParser',
 #     ]
 # }
->>>>>>> suyeon-ai
 
 # DJANGO REST FRAMEWORK
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-<<<<<<< HEAD
         'rest_framework_simplejwt.authentication.JWTAuthentication',    
-=======
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
->>>>>>> suyeon-ai
     ],
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.AllowAny",
@@ -197,6 +187,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
