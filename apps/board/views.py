@@ -1,11 +1,21 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrReadOnly
+from rest_framework import viewsets
+from .models import Board, Comment
+
+
 
 from .models import Board
-from .serializers import BoardSerializer
+from .serializers import BoardSerializer, CommentSerializer
 
 class BoardView(ListCreateAPIView):
+    # authentication 추가
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -33,6 +43,8 @@ class BoardView(ListCreateAPIView):
 
 
 class BoardDetailView(RetrieveUpdateDestroyAPIView):
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -63,3 +75,27 @@ class BoardDetailView(RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+# (댓글) Comment 보여주기, 수정하기, 삭제하기 모두 가능
+class CommentViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer): #유저 정보 전달
+        serializer.save(user = self.request.user)
+
+# (댓글) List Route
+CommentViewSet_list = CommentViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+
+# (댓글) Detail Route
+CommentViewSet_detail = CommentViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy',
+})        
