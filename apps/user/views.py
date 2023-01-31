@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import SignUpSerializer, SignInSerializer, UserSerializer
 
+
 # Create your views here.
 
 
@@ -38,7 +39,6 @@ class UserSignInView(generics.GenericAPIView):
             #쿠키데이터 저장
             res.set_cookie("access", access_token, httponly=True)
             res.set_cookie("refresh", refresh_token, httponly=True)
-
             return res
 
         else:

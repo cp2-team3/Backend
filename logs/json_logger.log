@@ -1,0 +1,11 @@
+{"url": "/api/board/", "method": "POST", "id": null, "name": "json_logger", "inDate": "2023-02-01T02:17:00.382Z", "detail": {"message": "POST access Board Creation", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "POST", "username": null, "name": "json_logger", "inDate": "2023-02-01T02:19:24.036Z", "detail": {"message": "POST access Board Creation", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "POST", "user": null, "name": "json_logger", "inDate": "2023-02-01T02:20:45.211Z", "detail": {"message": "POST access Board Creation", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "POST", "user": null, "name": "json_logger", "inDate": "2023-02-01T02:21:46.092Z", "detail": {"message": "POST access Board Creation", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "POST", "user": null, "name": "json_logger", "inDate": "2023-02-01T02:23:03.288Z", "detail": {"message": "POST access Board Creation", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "GET", "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:17.745Z", "detail": {"message": "GET access Board List", "levelname": "INFO"}}
+{"url": "/api/board/7", "method": "GET", "board_id": 7, "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:25.209Z", "detail": {"message": "GET access Board Detail", "levelname": "INFO"}}
+{"url": "/api/board/10", "method": "GET", "board_id": 10, "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:32.738Z", "detail": {"message": "GET access Board Detail", "levelname": "INFO"}}
+{"url": "/api/board/9", "method": "GET", "board_id": 9, "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:38.393Z", "detail": {"message": "GET access Board Detail", "levelname": "INFO"}}
+{"url": "/api/board/9", "method": "DELETE", "board_id": 9, "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:41.096Z", "detail": {"message": "DELETE access Board Detail", "levelname": "INFO"}}
+{"url": "/api/board/", "method": "GET", "user": null, "name": "json_logger", "inDate": "2023-02-01T02:24:45.435Z", "detail": {"message": "GET access Board List", "levelname": "INFO"}}
