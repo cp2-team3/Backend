@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('hit', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0)])),
                 ('uploadImages', models.ImageField(blank=True, null=True, upload_to='')),
                 ('uploadFiles', models.FileField(blank=True, null=True, upload_to='')),
-                ('category', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='board.category')),
+                # ('category', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='board.category')),
             ],
         ),
     ]

@@ -20,7 +20,7 @@ class Board(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hit = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     
-    # category = models.OneToOneField(Category, on_delete=models.CASCADE, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     uploadImages = models.ImageField(null=True, blank=True)
     uploadFiles = models.FileField(null=True, blank=True)
     
