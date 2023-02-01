@@ -12,7 +12,7 @@ class Category(models.Model):
     
     
 class Board(models.Model):
-    id = models.AutoField(primary_key=True, blank=True, null=False) # primary key
+    # id = models.AutoField(primary_key=True, blank=False, null=False,default='') # primary key
     user = models.ForeignKey('user.User',  default='',on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     content = models.TextField()
@@ -20,7 +20,7 @@ class Board(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hit = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     
-    # category = models.OneToOneField(Category, on_delete=models.CASCADE, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     uploadImages = models.ImageField(null=True, blank=True)
     uploadFiles = models.FileField(null=True, blank=True)
     

@@ -15,6 +15,7 @@ import datetime
 import environ
 
 from pathlib import Path
+from .logging import CustomisedJSONFormatter
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -99,7 +100,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'request_logging.middleware.LoggingMiddleware',
     'request_logging.middleware.LoggingMiddleware',
 ]
 
@@ -201,25 +201,54 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# logging
+# https://github.com/Rhumbix/django-request-logging
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    'formatters': {
+        'standard': {
+            'format' : "[%(asctime)s] %(levelname)s %(name)s:%(lineno)s %(message)s",
+            'datefmt' : "%Y-%m-%d %H:%M:%S"
         },
-        # 'json_logger': {
-        #     'level': 'INFO',
-        #     'class': 'logging.FileHandler',
-        #     'filename': BASE_DIR / 'logs/json_logger.log',
-        #     'formatter': 'json',
-        # },
+        'json': {
+            '()': CustomisedJSONFormatter,
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+        'log_file1': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/log_file1.log',
+            'formatter': 'standard',
+        },
+        'json_logger': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/json_logger.log',
+            'formatter': 'json',
+        },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'DEBUG',  # change debug level as appropiate
+        'log_file1': {
+            'handlers': ['log_file1'],
+            'level': 'INFO',
             'propagate': False,
         },
-    },
+        'json_logger': {
+            'handlers': ['json_logger'],
+            'level': 'INFO',
+            'propagate': False,
+        }
+    }
 }
