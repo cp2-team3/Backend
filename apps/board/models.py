@@ -12,7 +12,7 @@ class Category(models.Model):
     
     
 class Board(models.Model):
-    # id = models.AutoField(primary_key=True, blank=False, null=False,default='') # primary key
+    id = models.AutoField(primary_key=True, blank=True, null=False) # primary key
     user = models.ForeignKey('user.User',  default='',on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     content = models.TextField()
