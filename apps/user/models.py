@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     # 일반 user 생성
-    def create_user(self, id, name, email, password=None): #id, name, email 필수
+    def create_user(self, id, name, email, birth, password=None, **kwargs): #id, name, email 필수
         if not id:
             raise ValueError('must have user id')
         if not name:
@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
     # 관리자 user 생성
-    def create_superuser(self, id, name, email, birth, password=None, **extra_fields):
+    def create_superuser(self, id, name, email, birth, password=None):
         superuser = self.create_user(
             email,
             id = id,
@@ -36,8 +36,7 @@ class CustomUserManager(BaseUserManager):
             birth = birth,  
             
         )
-        # superuser.is_superuser = True
-        superuser.is_staff = True
+        superuser.is_superuser = True
         superuser.is_active = True
         superuser.save(using=self._db)
         return superuser
@@ -80,7 +79,6 @@ class User(AbstractBaseUser): #sign-up
     birth = models.DateField(
         verbose_name=_('Birth'),
         null=True,
-        default='2023-01-01'
         )
     contact = models.CharField(
         default='', 
@@ -92,12 +90,8 @@ class User(AbstractBaseUser): #sign-up
         verbose_name=_('Is active'),
         default=True
         )
-    # is_superuser = models.BooleanField(
-    #     verbose_name=_('Is superuser'),
-    #     default=False
-    #     )
-    is_staff = models.BooleanField(
-        verbose_name=_('Is staff'),
+    is_superuser = models.BooleanField(
+        verbose_name=_('Is superuser'),
         default=False
         )
     date_joined = models.DateTimeField(
@@ -116,9 +110,3 @@ class User(AbstractBaseUser): #sign-up
 
     class Meta:
         db_table = 'user'
-    
-    def has_perm(self, perm, obj=None):
-        return True
-    
-    def has_module_perms(self, app_label):
-        return True
