@@ -2,8 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly, IsStaffOrReadOnly
 from rest_framework import viewsets
 from .models import Board, Comment
 
@@ -13,9 +12,9 @@ from .models import Board
 from .serializers import BoardSerializer, CommentSerializer
 
 class BoardView(ListCreateAPIView):
-    # authentication 추가
+    
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -44,7 +43,7 @@ class BoardView(ListCreateAPIView):
 
 class BoardDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -79,7 +78,7 @@ class BoardDetailView(RetrieveUpdateDestroyAPIView):
 # (댓글) Comment 보여주기, 수정하기, 삭제하기 모두 가능
 class CommentViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 

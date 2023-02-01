@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     # 일반 user 생성
-    def create_user(self, id, name, email, password=None, **kwargs): #id, name, email 필수
+    def create_user(self, id, name, email, birth, password=None, **kwargs): #id, name, email 필수
         if not id:
             raise ValueError('must have user id')
         if not name:
@@ -18,7 +18,8 @@ class CustomUserManager(BaseUserManager):
         user = self.model(
             email = self.normalize_email(email),
             id = id,
-            name = name,        
+            name = name,  
+            birth = birth,      
         )
         
         user.set_password(password)
@@ -26,12 +27,13 @@ class CustomUserManager(BaseUserManager):
         return user
 
     # 관리자 user 생성
-    def create_superuser(self, id, name, email, password=None):
+    def create_superuser(self, id, name, email, birth, password=None):
         superuser = self.create_user(
             email,
             id = id,
             name = name,
             password = password,
+            birth = birth,  
             
         )
         superuser.is_superuser = True
@@ -104,7 +106,7 @@ class User(AbstractBaseUser): #sign-up
     # 사용자의 username field는 id으로 설정
     USERNAME_FIELD = 'id'
     # 필수로 작성해야하는 field
-    REQUIRED_FIELDS = ['email', 'name']
+    REQUIRED_FIELDS = ['email', 'name', 'birth']
 
     class Meta:
         db_table = 'user'

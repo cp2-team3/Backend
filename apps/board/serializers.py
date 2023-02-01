@@ -4,7 +4,7 @@ from .models import Board, Comment
 
 
 class BoardSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.nickname') #'user.nickname'
+    user = serializers.ReadOnlyField(source = 'user.id') #'user.nickname'
     hit = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -24,7 +24,8 @@ class BoardSerializer(serializers.ModelSerializer):
         # )
         
 class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.nickname') #'user.nickname'
+    user = serializers.ReadOnlyField(source = 'user.id') #'user.nickname'
     class Meta:
         model = Comment
-        fields = ['id', 'blog', 'user', 'created_at', 'comment']
+        fields = '__all__'
+        # ['id', 'blog', 'user', 'created_at', 'comment']
