@@ -31,6 +31,22 @@ class UserAgeStatsView(APIView):
         
         return Response({'result' : result}, status=status.HTTP_200_OK)
 
+class UserJoinTimeStatsView(APIView):
+
+    def get(self, request):
+        result = {}
+        today = datetime.now().date()
+        for i in range(5):
+            start_date = today - timedelta(days=365*(i+1))
+            end_date = today - timedelta(days=365*i)
+            count = (User.objects.filter(date_joined__range=(start_date,end_date)).count())
+
+            result[str(i)+'년 이상 '+str(i+1)+'년 미만 이용 유저 수'] = count
+        
+        result['5년 이상 이용 유저 수'] = User.objects.filter(date_joined__lte=today-timedelta(days=365*5)).count()
+
+        return Response({'result' : result}, status=status.HTTP_200_OK)
+
 class BoardSexStatsView(APIView):
 
     def get(self, request):
@@ -53,5 +69,21 @@ class BoardAgeStatsView(APIView):
 
         result['80대 이상 유저 수'] = Board.objects.filter(user__birth__lte=today-timedelta(days=365*80)).count()
         result['10대 미만 유저 수'] = result.pop('0대 유저 수')
+
+        return Response({'result' : result}, status=status.HTTP_200_OK)
+
+class BoardJoinTimeStatsView(APIView):
+
+    def get(self, request):
+        result = {}
+        today = datetime.now().date()
+        for i in range(5):
+            start_date = today - timedelta(days=365*(i+1))
+            end_date = today - timedelta(days=365*i)
+            count = (Board.objects.filter(user__date_joined__range=(start_date,end_date)).count())
+
+            result[str(i)+'년 이상 '+str(i+1)+'년 미만 이용 유저 수'] = count
+        
+        result['5년 이상 이용 유저 수'] = Board.objects.filter(user__date_joined__lte=today-timedelta(days=365*5)).count()
 
         return Response({'result' : result}, status=status.HTTP_200_OK)
