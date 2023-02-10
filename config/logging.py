@@ -2,6 +2,8 @@ import json_log_formatter
 import hashlib
 from datetime import datetime
 from cryptography.fernet import Fernet
+import random
+import json
 
 class CustomisedJSONFormatter(json_log_formatter.JSONFormatter):
     def json_record(self, message, extra, record):
@@ -30,4 +32,9 @@ class CustomisedJSONFormatter(json_log_formatter.JSONFormatter):
         key = Fernet.generate_key()
         fernet = Fernet(key)
         encrypt_str = fernet.encrypt(f"{extra}".encode('ascii'))
-        return encrypt_str
+        
+        record_id = random.randrange(10000000000000000000000000000000000000000000000000000000000000, 99999999999999999999999999999999999999999999999999999999999999)
+        
+        answer_string = {'recordId': record_id, 'logtimestamp': datetime.now(), 'data': encrypt_str}
+        
+        return answer_string
