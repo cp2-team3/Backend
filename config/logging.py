@@ -5,6 +5,12 @@ from cryptography.fernet import Fernet
 import random
 import json
 
+
+from uuid import uuid1
+from b64uuid import B64UUID
+
+
+
 class CustomisedJSONFormatter(json_log_formatter.JSONFormatter):
     def json_record(self, message, extra, record):
         if extra.get('request',0):
@@ -23,7 +29,8 @@ class CustomisedJSONFormatter(json_log_formatter.JSONFormatter):
                 extra['user_id'] = None
 
         # extra['name'] = record.__dict__['name']
-        extra['inDate'] = datetime.fromtimestamp(record.__dict__['created']).strftime('%Y-%m-%dT%X.%f')[:-3]+'Z'
+        # extra['inDate'] = datetime.fromtimestamp(record.__dict__['created']).strftime('%Y-%m-%dT%X.%f')[:-3]+'Z'
+        extra['inDate'] = datetime.fromtimestamp(record.__dict__['created']).strftime('%Y%m%d%H%M%S')
         extra['detail'] = {'message': message, 'levelname':record.__dict__['levelname']}
         extra.pop('request', None)
         # return extra
@@ -33,8 +40,16 @@ class CustomisedJSONFormatter(json_log_formatter.JSONFormatter):
         fernet = Fernet(key)
         encrypt_str = fernet.encrypt(f"{extra}".encode('ascii'))
         
-        record_id = random.randrange(10000000000000000000000000000000000000000000000000000000000000, 99999999999999999999999999999999999999999999999999999999999999)
+        # compress log data
+        extra['user_id'] = B64UUID(extra['user_id']).string
         
-        answer_string = {'recordId': record_id, 'logtimestamp': datetime.now(), 'data': encrypt_str}
+        method = {'GET': 1, 'POST': 2, 'PUT': 3, 'PATCH': 4, 'DELETE': 5}
+        extra['method'] = method[extra['method']]
+        
+        # record_id = random.randrange(10000000000000000000000000000000000000000000000000000000000000, 99999999999999999999999999999999999999999999999999999999999999)
+        record_id = uuid1().hex
+        short_id = B64UUID(record_id).string
+        
+        answer_string = {'recordId': short_id, 'logtimestamp': datetime.now().strftime('%Y%m%d%H%M%S'), 'data': encrypt_str}
         
         return answer_string
