@@ -16,7 +16,7 @@ logger = logging.getLogger('json_logger')
 
 class BoardView(ListCreateAPIView):
     
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
@@ -47,7 +47,7 @@ class BoardView(ListCreateAPIView):
 
 
 class BoardDetailView(RetrieveUpdateDestroyAPIView):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
@@ -86,7 +86,7 @@ class BoardDetailView(RetrieveUpdateDestroyAPIView):
     
 # (댓글) Comment 보여주기, 수정하기, 삭제하기 모두 가능
 class CommentViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer

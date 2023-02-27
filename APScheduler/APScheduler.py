@@ -1,3 +1,5 @@
+from apscheduler.schedulers.background import BackgroundScheduler
+import time
 import requests
 import json
 import random
@@ -46,8 +48,27 @@ title = "Dummy Article"
 content = "This is for making bulk log data"
 board_api(method='POST', title=title, content=content, id=user)
 
-for i in range(1,55000):
-    user = "test"+str(random.randint(1,15000))
-    title = "Dummy Article"
-    content = "This is for making bulk log data"
-    board_api(method='POST', title=title, content=content, id=user)
+def dummy_article_create():
+    
+    for i in range(0,1):#1개씩 발생
+        user = "test"+str(random.randint(1,15000)) #(1,15000)
+        title = "Dummy Article"
+        content = "This is for making bulk log data"
+        board_api(method='POST', title=title, content=content, id=user)
+        print('아티클 만들기 완료', 'user : ', user)
+
+
+   
+
+if __name__ == "__main__":
+    scheduler = BackgroundScheduler(timezone='Asia/Seoul')
+    scheduler.add_job(dummy_article_create, 'interval',seconds=12, id='dummy_article_create')
+    scheduler.start() #스케쥴링 작업 실행
+    
+    try:
+        # This is here to simulate application activity (which keeps the main thread alive).
+        while True:
+            time.sleep(2)
+    except (KeyboardInterrupt, SystemExit):
+        print('exit')
+        scheduler.shutdown() 

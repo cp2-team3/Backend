@@ -4,11 +4,11 @@ from apps.user.models import User
 
 
 # category
-class Category(models.Model):
-    category = models.CharField(max_length=50)
+# class Category(models.Model):
+#     category = models.CharField(max_length=50)
     
-    def __str__(self):
-        return self.category
+#     def __str__(self):
+#         return self.category
     
     
 class Board(models.Model):
@@ -20,7 +20,7 @@ class Board(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hit = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
+    # category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     uploadImages = models.ImageField(null=True, blank=True)
     uploadFiles = models.FileField(null=True, blank=True)
     
