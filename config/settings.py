@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'apps.user.apps.UserConfig',
     'apps.board.apps.BoardConfig',
     'apps.stats.apps.StatsConfig',
+    'CustomDBLogger',
 ]
 
 # REST_FRAMEWORK = {
@@ -243,6 +244,10 @@ LOGGING = {
             'filename': BASE_DIR / 'logs/json_logger.log',
             'formatter': 'json',
         },
+        'db_log': {
+            'level': 'DEBUG',
+            'class': 'CustomDBLogger.db_log_handler.DatabaseLogHandler',
+        },
     },
     'loggers': {
         'log_file1': {
@@ -254,7 +259,11 @@ LOGGING = {
             'handlers': ['json_logger'],
             'level': 'INFO',
             'propagate': False,
-        }
+        },
+        'db': {
+            'handlers': ['db_log'],
+            'level': 'DEBUG',
+        },
     }
 }
 
