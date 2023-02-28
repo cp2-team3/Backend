@@ -12,7 +12,8 @@ from .serializers import BoardSerializer, CommentSerializer
 
 import logging
 
-logger = logging.getLogger('json_logger')
+# logger = logging.getLogger('json_logger')
+logger = logging.getLogger('db')
 
 class BoardView(ListCreateAPIView):
     
