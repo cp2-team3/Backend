@@ -37,10 +37,15 @@ SECRET_KEY = env('SECRET_KEY')
 ALGORITHM = env('ALGORITHM')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+#ec2배포
+# DEBUG = False
+# ALLOWED_HOSTS = [
+#     '.amazonaws.com',
+# ]
 
 # Application definition
 
@@ -261,3 +266,4 @@ LOGGING = {
         },
     }
 }
+

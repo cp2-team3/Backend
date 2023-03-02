@@ -31,7 +31,7 @@ def is_leapyear(year):
         return False
 
 def calculate_date():
-    year = random.randint(1923,2022)
+    year = random.randint(1923,2022) 
     month = random.randint(1,12)
     if month == 2:
         if is_leapyear(year):
@@ -52,7 +52,8 @@ def calculate_date():
     return f"{year}-{month}-{day}"
 
 
-for i in range(1,15000):
+for i in range(1,50001):
     birth = calculate_date()
     sex = random.choice(['Male', 'Female'])
     signup_api(i, sex, birth)
+    print('아이디 만들기 완료, ', 'id : test', i, ', sex : ',sex,', birth : ' ,birth)

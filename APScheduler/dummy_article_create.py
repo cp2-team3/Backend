@@ -46,8 +46,9 @@ title = "Dummy Article"
 content = "This is for making bulk log data"
 board_api(method='POST', title=title, content=content, id=user)
 
-for i in range(1,55000):
-    user = "test"+str(random.randint(1,15000))
+for i in range(0,0):#1개씩 발생
+    user = "test"+str(random.randint(1,50000)) #(1,50000)
     title = "Dummy Article"
     content = "This is for making bulk log data"
     board_api(method='POST', title=title, content=content, id=user)
+    print('아티클 만들기 완료, ', 'user : ', user)
