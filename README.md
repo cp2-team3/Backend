@@ -1,5 +1,4 @@
-# Backend
-❗️*Django 백엔드 서비스*❗️
+❗️*Django(DRF) 백엔드 서비스*❗️
 -----------------------
 
 ## *구현 사항*
@@ -25,9 +24,23 @@
     - 게시글 더미 데이터
 - AWS EC2 배포
     - uWSGI, NginX 
+    - 메인 페이지
+    <img width="500" alt="스크린샷 2023-03-08 오후 9 51 24" src="https://user-images.githubusercontent.com/62207156/223719463-51d0fb8b-bf8a-4013-83e9-8fe6cfa5ff3a.png">
+    
+    - 회원가입 페이지
+    <img width="500" alt="스크린샷 2023-03-08 오후 9 52 11" src="https://user-images.githubusercontent.com/62207156/223719838-20349a5f-e562-4ba1-8b15-4e4b3a22aa99.png">
+    
+    - 로그인 페이지
+    <img width="500" alt="스크린샷 2023-03-08 오후 9 51 59" src="https://user-images.githubusercontent.com/62207156/223719647-6c09d44f-0095-423f-8477-97d49b6c2adc.png">
+    
+    - 게시판 페이지
+    <img width="500" alt="스크린샷 2023-03-08 오후 9 52 35" src="https://user-images.githubusercontent.com/62207156/223720042-2f791cc7-f096-4e27-8d8d-3fb011f9593a.png">
+    
+    - 집계 페이지
+    <img width="500" alt="스크린샷 2023-03-08 오후 9 52 26" src="https://user-images.githubusercontent.com/62207156/223720149-d32c1fb9-6ff9-42b9-affb-3beebd3b4e97.png">
 
 ## *기술 스택*
 - MySQL
-- Django
+- DRF
 - Python
 - AWS EC2
